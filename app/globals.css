@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-hero-violet: #beaaff;
+  --color-card-lilac: #e2d9ff;
+  --color-bitcoin-orange: #f97316;
+  --color-warm-cream: #fff7ed;
+  --color-lavender-mist: #f7f2ff;
+  --color-off-white: #f9fafb;
+  --color-ink-plum: #2c232e;
+  --color-graphite: #4b5563;
+  --color-slate: #6b7280;
+  --color-steel: #374151;
+  --color-mist: #e2e8f0;
+  --color-fog: #d1d5db;
+}
+
+html,
+body {
+  background-color: var(--color-lavender-mist);
+  color: var(--color-ink-plum);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-halyard), ui-sans-serif, system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* Uppercase medium is the label voice */
+.oryzo-label {
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: normal;
+}
+
+/* Mixed-case conversational voice */
+.oryzo-body {
+  font-weight: 400;
+  line-height: 1.26;
+}
+
+.dashed-divider {
+  border: none;
+  border-top: 1px dashed var(--color-mist);
+}
+
+/* Filled primary button — ink plum on light */
+.btn-pill {
+  border-radius: 36px;
+  background: var(--color-ink-plum);
+  color: #ffffff;
+  padding: 14px 24px;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: filter 0.18s ease, transform 0.18s ease;
+}
+.btn-pill:hover {
+  filter: brightness(1.25);
+}
+.btn-pill:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-ghost {
+  border-radius: 22.5px;
+  background: transparent;
+  border: 1px solid var(--color-steel);
+  color: var(--color-steel);
+  padding: 7.5px 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+.btn-ghost:hover {
+  background: var(--color-ink-plum);
+  border-color: var(--color-ink-plum);
+  color: #ffffff;
+}
+.btn-ghost:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.btn-ghost:disabled:hover {
+  background: transparent;
+  color: var(--color-steel);
+  border-color: var(--color-steel);
+}
+
+/* Elevated content panel — white on the lavender canvas */
+.surface-card {
+  background: #ffffff;
+  border: 1px solid var(--color-mist);
+  border-radius: 12px;
+}
+
+/* Accent — the single warm note */
+.ember {
+  color: var(--color-bitcoin-orange);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-lavender-mist);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-fog);
+  border-radius: 9999px;
+}
+
+.recharts-text,
+.recharts-cartesian-axis-tick-value tspan {
+  fill: var(--color-slate);
+  font-size: 11px;
+  text-transform: uppercase;
+}
