@@ -121,3 +121,21 @@ body {
   font-size: 11px;
   text-transform: uppercase;
 }
+
+/* Fluid type: scale the editorial type-scale down on small screens so
+   headings and body copy never overflow narrow phones. */
+@media (max-width: 640px) {
+  .text-display {
+    font-size: 40px !important;
+  }
+  .text-heading {
+    font-size: 30px !important;
+  }
+  .text-heading-sm {
+    font-size: 20px !important;
+  }
+  .text-body {
+    font-size: 19px !important;
+    line-height: 1.42 !important;
+  }
+}

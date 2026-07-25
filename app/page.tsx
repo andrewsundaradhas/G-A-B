@@ -2,7 +2,6 @@
 
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Nav } from "@/components/Nav";
 import { Results } from "@/components/Results";
 import { SessionHistory } from "@/components/SessionHistory";
 import { clearSessions, listSessions } from "@/lib/storage";
@@ -22,6 +21,24 @@ const Analyzer = dynamic(
     ),
   }
 );
+
+// StaggeredMenu uses gsap + useLayoutEffect; render it client-side only.
+const StaggeredMenu = dynamic(
+  () => import("@/components/StaggeredMenu").then((m) => m.default),
+  { ssr: false }
+);
+
+const MENU_ITEMS = [
+  { label: "Capture", ariaLabel: "Go to capture section", link: "#capture" },
+  { label: "Results", ariaLabel: "Go to results section", link: "#results" },
+  { label: "History", ariaLabel: "Go to session history", link: "#history" },
+  { label: "Method", ariaLabel: "Go to method section", link: "#method" },
+];
+
+const SOCIAL_ITEMS = [
+  { label: "GitHub", link: "https://github.com" },
+  { label: "Docs", link: "#method" },
+];
 
 export default function Home() {
   const [active, setActive] = useState<Session | null>(null);
@@ -58,20 +75,34 @@ export default function Home() {
   }, [refresh]);
 
   return (
-    <main className="min-h-screen">
-      <Nav />
+    <main className="min-h-screen overflow-x-hidden">
+      {/* Staggered slide-out menu (React Bits) as the primary navigation */}
+      <StaggeredMenu
+        position="right"
+        isFixed
+        items={MENU_ITEMS}
+        socialItems={SOCIAL_ITEMS}
+        displaySocials
+        displayItemNumbering
+        logoUrl="/logo.svg"
+        menuButtonColor="#2c232e"
+        openMenuButtonColor="#2c232e"
+        changeMenuColorOnOpen={false}
+        colors={["#e2d9ff", "#beaaff"]}
+        accentColor="#f97316"
+      />
 
       {/* Hero */}
       <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 pt-28 pb-16 relative bg-hero-violet">
         <span className="oryzo-label text-slate text-[12px] mb-4">
           Physics-Informed · Symmetry-Attentive · Markerless
         </span>
-        <h1 className="oryzo-label text-ink-plum text-[54px] md:text-[92px] leading-[0.9] max-w-[16ch]">
+        <h1 className="oryzo-label text-ink-plum text-[40px] sm:text-[56px] md:text-[92px] leading-[0.9] max-w-[16ch]">
           Gait &amp; Balance,
           <br />
           Read From Light.
         </h1>
-        <p className="oryzo-body text-body text-slate max-w-[46ch] mt-8">
+        <p className="oryzo-body text-[18px] sm:text-[22px] md:text-body text-slate max-w-[46ch] mt-8">
           A single camera. No markers, no wearables, no server. PS2GAT extracts
           your skeleton on-device and reports cadence, cross-limb symmetry, joint
           range-of-motion, and a calibrated fall-risk index.
